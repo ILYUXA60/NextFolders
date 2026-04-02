@@ -1,0 +1,13 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "NextFolders",
+  "outputfilename": "NextFolders",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "ILYUXA60",
+    "email": "123599358+ILYUXA60@users.noreply.github.com"
+  }
+}
