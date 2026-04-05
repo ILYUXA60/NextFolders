@@ -85,6 +85,7 @@ const TreeNode = ({ name, path, selectedPath, onSelect, serverUrl, username, pas
 }
 
 function App() {
+    const [showSplash, setShowSplash] = useState(true);
     const [serverUrl, setServerUrl] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -103,6 +104,7 @@ function App() {
         try {
             const config: any = await LoadConfig();
             if (config.settings) {
+                setTimeout(() => setShowSplash(false), 1500); // 1.5s splash screen
                 setServerUrl(config.settings.server_url || "");
                 setUsername(config.settings.username || "");
             }
@@ -157,6 +159,15 @@ function App() {
         setIsProcessing(false);
     }
 
+    if (showSplash) {
+        return (
+            <div style={{ height: "100vh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                <div className="spinner"></div>
+                <div style={{ fontSize: "2rem", fontWeight: 600, background: "linear-gradient(to right, #60a5fa, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", letterSpacing: "1px" }}>NextFolders</div>
+            </div>
+        );
+    }
+
     return (
         <div id="App">
             <div className="glass-panel">
@@ -206,7 +217,7 @@ function App() {
             </div>
 
             <div className="glass-panel" style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: '1rem' }}>
+                <div className="flex-row" style={{ gap: '1rem' }}>
                     <h2 style={{ margin: 0, flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>Шаблон структуры</h2>
                     <button className="btn-secondary" onClick={loadData} style={{ flexShrink: 0 }}>↻ Обновить конфиг</button>
                 </div>
